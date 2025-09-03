@@ -1,8 +1,19 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: testpod
+  name: python-deployment
 spec:
-  containers:
-  - name: testpod
-    image: nicolaka/netshoot:latest
+  selector:
+    matchLabels:
+      app: pythondeployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pythondeployment
+    spec:
+      containers:
+      - name: pythondeployment
+        image: mcr.microsoft.com/devcontainers/python:3.11
+        command: ["tail"]
+        args: ["-f", "/dev/null"] 
