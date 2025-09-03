@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myapp-argo-application
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.dev/werewoo/argo-tester.git	# the repo it should monitor
+    targetRevision: HEAD										# which revision
+    path: dev													# which path in the repo
+  destination: 
+    server: https://kubernetes.default.svc						# which cluster to push the resources to
+    namespace: myapp											# which namespace
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true										# create namespace if not exists
+    automated:
+      selfHeal: true
+      prune: true
