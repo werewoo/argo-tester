@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: testpod
-    image: nanajanashia/argocd-app:1.0
+    image: nicolaka/netshoot:latest
     resources:
       limits:
         cpu: "0.5"
